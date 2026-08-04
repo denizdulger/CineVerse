@@ -21,9 +21,22 @@ async function getMovie() {
       },
     }
   );
+  const movieCreditsResponse = await fetch(
+    `https://api.themoviedb.org/3/movie/${movieId}/credits`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiMGE3ZTNhOGQ3ZjdkNzNiZGNkYzQxZmE1ZmFlY2RiZiIsIm5iZiI6MTc4NDYxODQ5OC40LCJzdWIiOiI2YTVmMWUwMjgyOTdhMWQwZjEzMzM0YTQiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.w6etp5xgPP7C3aO0J4Udcs05_Lo0T6gw8UswFkGZboI",
+      },
+    }
+  );
+
   console.log(response.status);
   const movie = await response.json();
-
+  const movieCredits = await movieCreditsResponse.json();
+  console.log("Movie Credits", movieCredits);
   console.log(movie);
   document.getElementById("title").textContent = movie.title;
 
@@ -37,5 +50,16 @@ async function getMovie() {
   document.getElementById("date").textContent = movie.release_date;
   document.getElementById("runtime").textContent =
     "⏱️ " + movie.runtime + " min";
+  const castContainer = document.getElementById("cast");
+
+  movieCredits.cast.slice(0, 6).forEach((actor) => {
+    castContainer.innerHTML += `
+        <div class="actor">
+            <img src="${baseUrl}${actor.profile_path}" alt="${actor.name}">
+            <p>${actor.name}</p>
+            <small>${actor.character}</small>
+        </div>
+    `;
+  });
 }
 getMovie();
