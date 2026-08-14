@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>My Profile | CineVerse</title>
+
+    <link rel="stylesheet" href="/css/layout.css" />
+    <link rel="stylesheet" href="/css/profile.css" />
+  </head>
+
+  <body id="page-layout">
+    <div id="navbar"></div>
+
+    <div class="profile-container">
+      <div class="profile-header">
+        <div class="profile-avatar" id="profileAvatar">D</div>
+
+        <div class="profile-main-info">
+          <h1 id="profileUsername">Guest</h1>
+
+          <p id="profileEmail">guest@example.com</p>
+
+          <span class="member-info"> 🎬 CineVerse Member </span>
+        </div>
+      </div>
+
+      <!-- Edit Profile -->
+      <div class="profile-actions">
+        <button id="editProfile">Edit Profile</button>
+      </div>
+
+      <!-- Statistics -->
+      <div class="stats">
+        <div class="card">
+          <div class="card-icon">❤️</div>
+
+          <div>
+            <h2>Favorites</h2>
+            <span id="favoriteCount">0</span>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-icon">⭐</div>
+
+          <div>
+            <h2>Rated Movies</h2>
+            <span id="ratedCount">0</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Activity -->
+      <div class="profile-section">
+        <h2>My Activity</h2>
+
+        <div class="activity-item">
+          <span>❤️</span>
+
+          <div>
+            <strong>Favorite Movies</strong>
+
+            <p>Your saved movies will appear here.</p>
+          </div>
+        </div>
+
+        <div class="activity-item">
+          <span>⭐</span>
+
+          <div>
+            <strong>Movie Ratings</strong>
+
+            <p>Movies you rate will appear here.</p>
+          </div>
+        </div>
+      </div>
+
+      <button id="profileLogout" class="logout-button">Logout</button>
+    </div>
+
+    <script type="module" src="/js/authGuard.js"></script>
+    <script type="module" src="/js/navbar.js"></script>
+    <script type="module" src="/js/profile.js"></script>
+  </body>
+</html>

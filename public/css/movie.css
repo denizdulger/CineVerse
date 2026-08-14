@@ -51,6 +51,7 @@ header a:hover{
     gap:20px;
     margin-top:20px;
     flex-wrap:wrap;
+    justify-content: space-between;
 }
 .actor{
     width:110px;
@@ -62,6 +63,36 @@ header a:hover{
     object-fit:cover;
     border-radius:50%;
 }
+@media screen and (max-width:1200px) {
+    #cast{
+        display:none
+    }
+    .actor{
+        width:110px;
+        text-align:center;
+    }
+    .actor img{
+        width:150px;
+        height:150px;
+        object-fit:cover;
+        border-radius:50%;
+    }
+}
+@media screen and (min-width:1600px) {
+   
+    .actor{
+        width:110px;
+        text-align:center;
+    }
+    .actor img{
+        width:200px;
+        height:200px;
+        object-fit:cover;
+        border-radius:50%;
+    }
+}
+
+
 
 .actor p{
     margin-top:10px;

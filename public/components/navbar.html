@@ -1,0 +1,27 @@
+<link rel="stylesheet" href="../css/navbar.css" />
+<link rel="stylesheet" href="../css/profile.css" />
+<nav class="main-nav">
+  <a class="site-header" href="/">CineVerse</a>
+  <input id="movie-search" type="text" placeholder="Search movie..." />
+
+  <div class="header-right">
+    <div class="profile" id="profileMenu">
+      <div class="profile-info">
+        <div class="avatar">D</div>
+
+        <span id="username">Guest</span>
+
+        <span class="arrow">▼</span>
+      </div>
+
+      <div class="dropdown" id="dropdown">
+        <a href="/profile.html">My Profile</a>
+        <a href="#">Favorites</a>
+        <button id="logout">Logout</button>
+      </div>
+    </div>
+
+    <a href="/login" style="display: none" id="signin-button">Sign In</a>
+  </div>
+  <script type="module" src="../js/navbar.js"></script>
+</nav>

@@ -1,0 +1,36 @@
+{
+  "name": "site-2",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "bu bir kişisiel film sitesidir",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/denizdulger/CineVerse.git"
+  },
+  "keywords": [],
+  "author": "Deniz Dülger",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/denizdulger/CineVerse/issues"
+  },
+  "homepage": "https://github.com/denizdulger/CineVerse#readme",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3",
+    "pg": "^8.22.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  },
+  "allowScripts": {
+    "bcrypt@6.0.0": true
+  }
+}
