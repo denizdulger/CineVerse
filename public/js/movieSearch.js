@@ -1,15 +1,23 @@
 import { getMovies } from "./getMovies.js";
+import { parseJwtNode } from "./common.js";
 const baseUrl = "https://image.tmdb.org/t/p/w440_and_h660_face";
+const token = localStorage.getItem("token");
+
+if (!token) {
+  window.location.href = "/login.html";
+}
+
+const userInfo = parseJwtNode(token);
 
 async function searchMovies(query) {
   const response = await fetch(
-    `https://api.themoviedb.org/3/search/movie?query=${query}`,
+    `http://localhost:3001/api/movies/search?query=${query}`,
     {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiMGE3ZTNhOGQ3ZjdkNzNiZGNkYzQxZmE1ZmFlY2RiZiIsIm5iZiI6MTc4NDYxODQ5OC40LCJzdWIiOiI2YTVmMWUwMjgyOTdhMWQwZjEzMzM0YTQiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.w6etp5xgPP7C3aO0J4Udcs05_Lo0T6gw8UswFkGZboI",
+
+        Authorization: `Bearer ${token}`,
       },
     }
   );

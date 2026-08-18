@@ -4,9 +4,8 @@ import jwt from "jsonwebtoken";
 
 const register = async (req, res) => {
   try {
-    console.log("register tetiklendi");
-
     const { username, email, password } = req.body;
+    console.log(username, email, password, "31311313");
 
     if (!username || !email || !password) {
       return res.status(400).json({
@@ -35,20 +34,58 @@ const register = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    await pool.query(
+    const result = await pool.query(
       `
       INSERT INTO users (username, email, password)
       VALUES ($1, $2, $3)
+      RETURNING id, username, email, profile_image
       `,
       [username, email, hashedPassword]
     );
 
-    return res.status(201).json({
+    const newUser = result.rows[0];
+
+    const token = jwt.sign(
+      {
+        id: newUser.id,
+        email: newUser.email,
+        profile_image: newUser.profile_image,
+        username: newUser.username,
+      },
+      process.env.JWT_SECRET,
+      {
+        expiresIn: "7d",
+      }
+    );
+    return res.status(200).json({
       message: "Kayıt başarılı.",
+      token,
     });
   } catch (err) {
     console.error(err);
 
+    // Unique constraint
+    if (err.code === "23505") {
+      return res.status(409).json({
+        error: "Bu email zaten kayıtlı.",
+      });
+    }
+
+    // Not null violation
+    if (err.code === "23502") {
+      return res.status(400).json({
+        error: "Gerekli alanlardan biri eksik.",
+      });
+    }
+
+    // Foreign key violation
+    if (err.code === "23503") {
+      return res.status(400).json({
+        error: "Geçersiz kullanıcı veya ilişkili kayıt.",
+      });
+    }
+
+    // Database connection / server error
     return res.status(500).json({
       error: "Sunucu hatası.",
     });

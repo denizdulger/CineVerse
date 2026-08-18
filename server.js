@@ -7,7 +7,7 @@ import { dirname } from "path";
 
 import authRoutes from "./routes/auth.js";
 import favoritesRoutes from "./routes/favorites.js";
-
+import moviesRoutes from "./routes/movies.js";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
@@ -26,11 +26,12 @@ app.use(
 );
 
 // Uploads klasörü
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+app.use("/uploads", express.static(path.join(__dirname, "routes", "uploads")));
 
 // API ROUTES
 app.use("/api/auth", authRoutes);
 app.use("/api/favorites", favoritesRoutes);
+app.use("/api/movies", moviesRoutes);
 
 // Ana sayfa
 app.get("/", (req, res) => {

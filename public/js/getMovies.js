@@ -1,14 +1,7 @@
 async function getMovies() {
   const baseUrl = "https://image.tmdb.org/t/p/w440_and_h660_face";
 
-  const response = await fetch("https://api.themoviedb.org/3/discover/movie", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiMGE3ZTNhOGQ3ZjdkNzNiZGNkYzQxZmE1ZmFlY2RiZiIsIm5iZiI6MTc4NDYxODQ5OC40LCJzdWIiOiI2YTVmMWUwMjgyOTdhMWQwZjEzMzM0YTQiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.w6etp5xgPP7C3aO0J4Udcs05_Lo0T6gw8UswFkGZboI",
-    },
-  });
+  const response = await fetch("/api/movies");
   const data = await response.json();
   console.log(data);
 

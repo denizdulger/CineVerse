@@ -1,5 +1,6 @@
 console.log("movie.js çalıştı");
 console.log(window.location.href);
+import { parseJwtNode } from "./common.js";
 
 const params = new URLSearchParams(window.location.search);
 
@@ -16,8 +17,7 @@ async function getMovie() {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiMGE3ZTNhOGQ3ZjdkNzNiZGNkYzQxZmE1ZmFlY2RiZiIsIm5iZiI6MTc4NDYxODQ5OC40LCJzdWIiOiI2YTVmMWUwMjgyOTdhMWQwZjEzMzM0YTQiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.w6etp5xgPP7C3aO0J4Udcs05_Lo0T6gw8UswFkGZboI",
+        Authorization: `Bearer ${process.env.TMBD_API_TOKEN}`,
       },
     }
   );
@@ -61,5 +61,32 @@ async function getMovie() {
         </div>
     `;
   });
+
+  const jwt = localStorage.getItem("token");
+  const userInfo = jwt ? parseJwtNode(jwt) : null;
+  console.log("JWT:", userInfo);
+
+  document.querySelector("#add-watched").addEventListener("click", async () => {
+    if (!userInfo) {
+      window.location.href = "/login.html";
+      return;
+    }
+
+    const response = await fetch("http://localhost:3001/api/movies/watched", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer  ${jwt}`,
+      },
+      body: JSON.stringify({
+        movieId: movieId,
+        userId: userInfo?.id,
+      }),
+    });
+
+    const data = await response.json();
+    console.log(data);
+  });
 }
+
 getMovie();
